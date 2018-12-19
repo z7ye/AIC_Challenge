@@ -1,0 +1,56 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import sys
+def check(left, right):
+    return (left == '(' and right == ')') or (left == '[' and right == ']') or (left == '{' and right == '}')
+
+def BalancedBracket(s):
+    res = ''
+    bracketstack = []
+    balanced = True
+    for each in s:
+        if each in ['(','{','[']:
+            res += each
+            bracketstack.append(each)
+        elif each in [')',']','}']:
+            res += each
+            balanced = balanced and len(bracketstack) <>0 and check(bracketstack.pop(), each)
+    balanced = balanced and len(bracketstack)== 0
+    if balanced:
+        print 'Y ' + res
+    else:
+        print 'N ' + res
+
+BalancedBracket(sys.stdin.readline())
+
+
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+
+import json
+import sys
+
+report = json.load(sys.stdin)['report']
+out = []
+
+for student in report:
+    for subject in student['subject']:
+        if subject['grade'] <> 'F':
+            out.append([subject['code'], subject['grade'], student['enrollment'], student['name']])
+out.sort()
+for each in out:
+    print( ' '.join(each))
+
+
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+
+import base64
+import hashlib
+import sys
+
+urls = sys.stdin.read().splitlines()
+
+for url in urls:
+    hash = base64.b64encode(hashlib.sha256(url).digest(), 'Aa')
+    print('http://sprng.brd/' + hash[:6])
+
